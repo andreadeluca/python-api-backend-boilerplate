@@ -16,4 +16,7 @@ def is_in_prod_env():
 
 
 def is_in_dev_env():
-    return ENVIRONMENT in DEV_STR_TUPLE
+    return ENVIRONMENT in (DEV_STR_TUPLE + LOC_STR_TUPLE)
+
+def get_env_name():
+    return ENVIRONMENT

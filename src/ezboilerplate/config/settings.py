@@ -2,13 +2,17 @@ import os
 
 from dotenv import load_dotenv
 
-import loggerWrapper as lw
+import ezboilerplate.config.loggerWrapper as lw
 from ezboilerplate.utils import envUtils
 
 # TODO DATABASE MANAGER QUA DENTRO? FORSE Sì
 # TODO CHECK DELLE VARIABILI CRITICHE ALTRIMENTI COL CAZZO CHE PARTE
 
 _logger = lw.get_logger(__name__)
+
+_logger.debug("***************************************************")
+_logger.debug(f" Current environment is dev = {envUtils.get_env_name()}")
+
 
 # The configuration will always be loaded from local .env if environment is dev
 if envUtils.is_in_dev_env():
@@ -20,7 +24,7 @@ if envUtils.is_in_dev_env():
         _logger.exception(e)
 
 
-def retrieve_setting(settingstr: str, default=None, type=None):
+def retrieve_setting(settingstr: str, default=None, cast=None):
     """
 
     :param default: Optional parameter, you can use it whether you would like
@@ -29,12 +33,12 @@ def retrieve_setting(settingstr: str, default=None, type=None):
     """
     value = os.environ.get(settingstr, default)
 
-    if type is int:
+    if cast is int:
         try:
             return int(value)
         except (TypeError, ValueError):
             return default
-    elif type is bool:
+    elif cast is bool:
         if value is None:
             return default
         return str(value).strip().lower() in ("1", "true", "yes", "on")

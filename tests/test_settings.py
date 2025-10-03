@@ -1,5 +1,5 @@
 from ezboilerplate.config import settings
-
+import pytest
 
 def test_retrieve_string(monkeypatch):
     monkeypatch.setenv("APP_NAME", "EzBoilerplate")
@@ -37,3 +37,30 @@ def test_retrieve_bool_default(monkeypatch):
     monkeypatch.delenv("DEBUG", raising=False)
     assert settings.retrieve_bool_setting("DEBUG", False) is False
     assert settings.retrieve_bool_setting("DEBUG", True) is True
+
+
+def test_retrieve_default(monkeypatch):
+    monkeypatch.delenv("MISSING_VAR", raising=False)
+    assert settings.retrieve_setting("MISSING_VAR", "default") == "default"
+
+
+def test_retrieve_int_valid(monkeypatch):
+    monkeypatch.setenv("PORT", "8080")
+    assert settings.retrieve_int_setting("PORT") == 8080
+
+
+@pytest.mark.parametrize("value,expected", [
+    ("1", True),
+    ("true", True),
+    ("yes", True),
+    ("on", True),
+    ("0", False),
+    ("false", False),
+    ("no", False),
+    ("off", False),
+    ("", False),
+])
+
+def test_retrieve_bool(monkeypatch, value, expected):
+    monkeypatch.setenv("DEBUG", value)
+    assert settings.retrieve_bool_setting("DEBUG", default=False) == expected

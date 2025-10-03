@@ -14,7 +14,8 @@ dependencies = [
     "python-dotenv (>=1.1.1,<2.0.0)",
     "pydantic (>=2.11.9,<3.0.0)",
     "pathlib (>=1.0.1,<2.0.0)",
-    "pymongo (>=4.15.2,<5.0.0)"
+    "pymongo (>=4.15.2,<5.0.0)",
+    "motor (>=3.7.1,<4.0.0)"
 ]
 
 
@@ -37,6 +38,6 @@ pythonpath = ["src"]
 [tool.poetry]
 name = "python-api-backend-boilerplate"
 version = "0.1.0"
-description = "A lightweight backend boilerplate"
+description = "A lightweight API backend boilerplate"
 authors = ["Andrea De Luca"]
 package-mode=false
