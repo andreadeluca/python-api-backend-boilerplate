@@ -17,3 +17,4 @@ async def test_hello():
         response = await ac.get("/hello")
     assert response.status_code == 200
     assert response.json() == {"message": "Ciao niko"}
+

@@ -27,7 +27,8 @@ dev = [
     "pytest (>=8.4.2,<9.0.0)",
     "pytest-asyncio (>=1.2.0,<2.0.0)",
     "httpx (>=0.28.1,<0.29.0)",
-    "coverage (>=7.10.7,<8.0.0)"
+    "coverage (>=7.10.7,<8.0.0)",
+    "pytest-cov (>=7.0.0,<8.0.0)"
 ]
 
 [tool.pytest.ini_options]
